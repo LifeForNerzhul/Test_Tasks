@@ -12,8 +12,10 @@ pd.set_option('display.float_format', '{:.3f}'.format)
 
 df = pd.read_excel('Тестовое задание.xlsx',)
 print('Previous Datatypes\n', df.dtypes, sep='')
+
 # Delete hidden column
 df = df.drop(columns='good (1)', axis=1)
+# Validate data type
 for i in range(len(df)):
     if type(df.loc[i, 'cluster']) is not np.float64:
         df.loc[i, 'cluster'] = pd.NaT
@@ -36,6 +38,7 @@ df = df.astype({'cluster': int, 'count': int, 'x': float, 'y': float})      # 'y
 # delete duplicates
 df = df.drop_duplicates(subset=['area', 'keyword'], keep='first', inplace=False).reset_index(drop=True)
 
+# add color
 df['color'] = 0
 i = 1
 df.loc[0, 'color'] = random.choice(colors)
@@ -61,7 +64,7 @@ while i <= len(df.index) - 1:
     used_colors.add(df.loc[i, 'color'])
     i += 1
 
-df = df.sort_values(['area', 'cluster', 'cluster_name', 'count'], ascending=(True, True, True, False))    # сортируем, False - по возрастанию
+df = df.sort_values(['area', 'cluster', 'cluster_name', 'count'], ascending=(True, True, True, False))    # False - по возрастанию
 df = df.dropna(axis=0).reset_index(drop=True)
 
 df.to_excel('result.xlsx', index=False, freeze_panes=(1, 0))
