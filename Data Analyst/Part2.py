@@ -1,6 +1,14 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+
+def create_folder():
+    try:
+        os.makedirs('Diagrams')
+    except FileExistsError:
+        pass
 
 
 def check_len_phrase(line: str) -> str:
@@ -63,7 +71,7 @@ def diagram(area_name: str, x: list, y: list, name: list, col: list, cluster: li
     for g in range(len(area_name)):
         if area_name[g] not in wrong_symbols:
             correct_name += area_name[g]
-    plt.savefig(f'{correct_name}.png')
+    plt.savefig(f'Diagrams\\{correct_name}.png')
 
     '''
     # just to watch
@@ -71,6 +79,7 @@ def diagram(area_name: str, x: list, y: list, name: list, col: list, cluster: li
     '''
 
 
+create_folder()
 data = pd.read_excel('result.xlsx')
 i = 1
 j = 1
