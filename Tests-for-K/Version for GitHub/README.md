@@ -1,0 +1,1 @@
+**Part of the code will not work since fragments and links that pointed to the company have been removed**
